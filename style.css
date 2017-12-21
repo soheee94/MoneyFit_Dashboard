@@ -1,0 +1,179 @@
+/* -------------------------common------------------------- */
+
+body{
+	width: 100vw;
+	margin : 0;
+	color: #313131;
+	overflow-x: hidden;
+	font-family: Rubik,sans-serif;
+}
+
+a{
+	color: #333333;
+}
+
+.bg-light {
+    background-color: #edf1f5 !important;
+}
+
+.bg-white{
+	background-color: #fff !important;
+}
+
+.pd-25{
+	padding: 25px;
+}
+
+.mt-15{
+	margin-top: 15px;
+}
+
+h1,h2,h3,h4,h5,h6{
+	color: #313131;
+    font-family: Rubik,sans-serif;
+}
+
+/* -------------------------common------------------------- */
+
+
+/* -------------------------header------------------------- */
+
+header{
+  background-color: #2D2441;
+  height: 90px;
+}
+
+header img{
+	width: 90px;
+	margin-left : 20px; 
+	margin-top : 9px;
+}
+
+/* -------------------------header------------------------- */
+
+/*///////////////////////////////////////////////////////////////*/
+/*///						index.html						 ////*/
+/*///////////////////////////////////////////////////////////////*/
+
+
+/* -------------------------sidebar------------------------- */
+
+.sidebar {
+/*    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;*/
+    height: 100vh;
+    padding: 20px 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-right: 1px solid #eee;
+}
+
+.sidebar .nav{
+	margin-bottom: 20px;
+}
+
+.sidebar .nav-item{
+	width: 100%;
+}
+
+.sidebar .nav-link{
+	font-size: 1.2em;
+	font-weight: 500;
+}
+
+.sidebar .active{
+	font-weight: bold;
+	border-left: 5px solid #FCB239;
+	border-radius: 0px;
+}
+
+.nav>li>a:focus, .nav>li>a:hover{
+	background-color: #FCB239;
+	color: #2D2441;
+}
+
+/* -------------------------sidebar------------------------- */
+
+/* -------------------------main-content------------------------- */
+main{
+	height: 100vh;
+	padding-top: 15px;
+}
+
+.main-content{
+	padding-right: 15px;
+}
+
+/* ----------------------Visualization---------------------- */
+
+.box-title{
+	margin: 0 0 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.count, .count-deco{
+	font-weight: bold;
+	font-size: 2.5em;
+}
+/* ----------------------Visualization---------------------- */
+
+/* ----------------------Fitness Container---------------------- */
+
+
+/* -------------------Fitness Select------------------- */
+.fitness-select{
+	padding: 20px;
+}
+
+#fitness-drop{
+	height: 45px;
+	width: 90%;
+}
+
+/* -------------------Fitness Select------------------- */
+
+/* ----------------------Fitness Container---------------------- */
+
+
+/* ----------------------Client Container---------------------- */
+
+#client-search-input{
+	width: 30%;
+	display: inline;
+}
+
+#challenge-drop{
+	width: 30%;
+	float: right;
+}
+
+.client-top{
+	margin-bottom: 15px;
+}
+
+/* -------------------Client Container------------------- */
+
+
+/* -------------------------main-content------------------------- */
+
+
+
+/*///////////////////////////////////////////////////////////////*/
+/*///						clientinfo.html					 ////*/
+/*///////////////////////////////////////////////////////////////*/
+
+/* -------------------------main-content------------------------- */
+
+/* -------------------Member Information------------------ */
+.member-information{
+	height: 130px;
+}
+
+/* -------------------Member Information------------------ */
+
+/* -------------------------main-content------------------------- */
