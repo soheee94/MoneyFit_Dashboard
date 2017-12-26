@@ -61,14 +61,14 @@
 							<div class="col-lg-4 col-sm-6 col-xs-12">
 								<div class="visualbox bg-white pd-25">
 									<h3 class="box-title">Total Users</h3>
-									<span class="count">200</span>
+									<span class="count" id="total-users">0</span>
 								</div>
 							</div>
 							
 							<div class="col-lg-4 col-sm-6 col-xs-12">
 								<div class="visualbox bg-white pd-25">
 									<h3 class="box-title">Total amount</h3>
-									<span class="count-deco">\</span><span class="count">1000000</span>
+									<span class="count-deco">\</span><span class="count" id="total-amount">0</span>
 								</div>
 							</div>
 
@@ -86,17 +86,17 @@
 							<div class="row">
 								<!-- Fitness Select -->
 								<div class="fitness-select col-lg-6 col-sm-6 col-xs-12">
-									<select id="fitness-drop" href="#" class="dropdown-toggle form-control" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="true">
+									<select id="fitness-drop" href="#" class="dropdown-toggle form-control" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="true" onchange="getFitnessInfo()">
 		                                  <option id="fitnessid" value='' selected> 피트니스 리스트 </option>
 		                            </select>
 								</div>							
 								<!-- /Fitness Select -->
 
 								<!-- Fitness Info -->
-								<div class="fitness-info col-lg-6 col-sm-6 col-xs-12">
+								<div class="fitness-info col-lg-6 col-sm-6 col-xs-12 row">
 									<h3 class="box-title">Fitness Information</h3>
-									<p>지점명 : 몸짱이 될꺼야</p>
-									<p>Version : 1.0</p>
+									<p><b>지점명</b> : <span id="fitnessname"> -- </span></p>
+									<p><b>Device 설치 갯수</b> : <span id="fitnessDeviceCount"> -- </span>개 ( 최신 업데이트 날짜 : <span id="fitnessDeviceUpdateDate"> -- </span> )</p>
 								</div>
 								<!-- /Fitness Info -->
 							</div>							
@@ -105,19 +105,30 @@
 
 						<!-- Client Container -->
 						<div class="bg-white client-container pd-25 mt-15">
-							<div class="client-top">
-								<input type="text" id="client-search-input" class="form-control" aria-describedby="helpBlock" placeholder="회원 검색">
+							<div class="client-top row">
+								<div class="client-search col-lg-8 col-sm-8 col-xs-12">
+									<input type="text" id="client-search-input" class="form-control" aria-describedby="helpBlock" placeholder="검색">
+								</div>
+
+								<!-- <div class="col-lg-4 col-sm-4 col-xs-12">
+									<p id="today-date"></p>
+								</div> -->
+
+								<!-- <div class="challenge-drop-container col-lg-4 col-sm-4 col-xs-12">
+									<select id="challenge-drop" href="#" class="dropdown-toggle form-control" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="true">
+			                            <option id="challengeid" value='' selected> 챌린지 리스트 </option>
+			                        </select>
+								</div> -->
 								
-								<select id="challenge-drop" href="#" class="dropdown-toggle form-control" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="true">
-		                            <option id="challengeid" value='' selected> 챌린지 리스트 </option>
-		                        </select>
+								
+								
 							</div>
 
 							<div>
 								<table data-order='[[ 0, "desc"]]' id="client-datatable" class="table table-striped table-bordered">
 				                  <thead>
 				                    <tr>
-				                      <th id="">지점명</th>
+				                      <th id="thead-fitnessname">지점명</th>
 				                      <th id="">이름</th>
 				                      <th id="">성별</th>
 				                      <th id="">나이</th>

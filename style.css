@@ -130,12 +130,27 @@ main{
 	padding: 20px;
 }
 
-#fitness-drop{
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+	line-height: 45px;
+}
+
+.select2-container--default .select2-selection--single{
 	height: 45px;
-	width: 90%;
+	width: 100%;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow{
+	top: 10px;
 }
 
 /* -------------------Fitness Select------------------- */
+
+/* -------------------Fitness Info------------------- */
+.fitness-info{
+	margin-left: 10px;
+}
+
+/* -------------------Fitness Info------------------- */
 
 /* ----------------------Fitness Container---------------------- */
 
@@ -143,18 +158,32 @@ main{
 /* ----------------------Client Container---------------------- */
 
 #client-search-input{
-	width: 30%;
+	width: 45%;
 	display: inline;
 }
 
-#challenge-drop{
-	width: 30%;
-	float: right;
-}
 
 .client-top{
 	margin-bottom: 15px;
 }
+
+#client-datatable{
+	text-align: center;
+}
+
+#client-datatable th{
+	text-align: center;
+}
+
+#thead-fitnessname{
+	width: 20%;
+}
+
+#select2-challenge-drop-container .select2-container--default .select2-selection--single{
+	width: 30%;
+}
+
+
 
 /* -------------------Client Container------------------- */
 
