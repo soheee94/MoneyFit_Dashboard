@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!-- Meta, title, CSS, favicons, etc. -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+
+	<title>Team Elysium - MoneyFit Dashboard</title>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" />
+	<link href="./vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link href="./vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Datatables -->
+	<link href="./vendor/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+	<link href="./vendor/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+	<link href="./vendor/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+
+	<!-- html2Canvas -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+
+	<!-- Title image -->
+	<link rel="shortcut icon" href="./image/webicon.png" />
+	<script>document.write("<link href='./style.css?version=" + Date.now() + "' rel='stylesheet'");</script>
+
+</head>
+<body>
+	<!-- wrap -->
+	<div class="wrap" style='page-break-before:always'> 
+		<!-- Header -->
+		<header>
+			 <img src="./image/mf_logo1.png">
+		</header>
+		<!-- /Header -->
+
+		<!-- Content -->
+		<div class="content container-fluid">
+			<div class="row">
+				<!-- sidebar //option -->
+				<nav class="col-sm-2 col-md-2 d-none d-sm-block sidebar">
+					<ul class="nav nav-pills flex-column">
+						<li class="nav-item">
+							<a href="#" class="nav-link active">Fitness</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">Challenge</a>
+						</li>
+					</ul>					
+				</nav>
+				<!-- /sidebar //option -->
+
+				<!-- main-content -->
+				<main role="main" class="col-sm-10 ml-sm-auto col-md-10 pt-3 bg-light main-wrapper">
+					<div class="main-content row">
+						<!-- Member Information -->
+						<div class="member-information-container col-sm-3 ml-sm-auto col-md-3">
+						   <div class="member-information bg-white pd-25">
+								 <div class="member-information-info">
+									<h2 id="member-name"> -- </h2>
+									<p><span id="member-age"> -- </span> / <span id="member-sex"> -- </span></p>
+									<p><span id="member-email"> -- </span></p>
+									<p><span id="member-fitness"> -- </span></p>
+								 </div>
+
+								 <div class="member-information-number">
+									<p>Total Point <span class="count" id="member-balance">0</span></p>								 
+									<p>Success rate <span class="count">100</span></p>
+								 </div>
+
+						   </div>
+						</div>
+						<!-- /Member Information -->
+
+
+						<div class="col-sm-9 ml-sm-auto col-md-9 bg-white pd-25">
+							<div id="tab">
+							   <ul class="nav nav-tabs">
+							      <li class="active">
+							         <a href="#challenge" data-toggle="tab">챌린지 이용 내역</a>
+							      </li>
+							      <li>
+							      	<a href="#point" data-toggle="tab">포인트 사용 내역</a>
+							      </li>
+							   </ul>
+
+							   <div class="tab-content">
+							      <div class="tab-pane active" id="challenge">
+							         <!-- Challenge -->
+										<div class="challenge-container mt-15 mb-50">
+											<h3 class="box-title">Challenge</h3>
+											<div class="challenge-info">
+												<p><span id="challenge-name">Push Up</span> ( <span id="challenge-date">2017-12-24 ~ 2017-12-31</span> )</p>
+												
+												<p id="challenge-price">10,000 원 배팅 중</p>
+												<p id="challenge-success-rate">현재 성공률 : 27%</p>
+											</div>
+
+											<p class="pd-25 not-used-challenge" style="text-align : center; display : none;">현재 이용 내역 없음 </p>
+										</div>
+										<!-- /Challenge -->
+
+										<!-- Before Challenge List -->
+										<div class="challenge-list-container mt-15">
+											<h3 class="box-title">Challenge List</h3>
+											<div>
+												<table data-order='[[ 0, "desc"]]' id="client-datatable" class="table table-striped table-bordered">
+												  <thead>
+													<tr>
+													  <th id="">챌린지 이름</th>
+													  <th id="">배팅 금액</th>
+													  <th id="">진행 기간</th>
+													  <th id="">결과</th>
+													  <th id="">환급 금액</th>
+													</tr>
+												  </thead>
+
+												  <tbody id="table_tbody">
+													<tr>
+													  <td></td>
+													  <td></td>
+													  <td></td>
+													  <td></td>
+													  <td></td>
+													</tr>
+												  </tbody>
+												</table>
+											</div>
+											
+										</div>
+										<!-- /Before Challenge List -->
+							      </div>
+
+							      <div class="tab-pane" id="point">
+							         <h3>포인트 사용 내역</h3>
+							      </div>
+							   </div>
+							</div>
+						</div>
+						
+					</div>					
+				</main>
+				<!-- /main-content -->
+			</div>
+		</div>
+		<!-- /Content -->
+
+		<!-- Footer -->
+		<!-- /Footer -->
+		
+	</div>
+	<!-- /wrap content -->
+
+
+</body>
+
+<!-- jQuery -->
+<script src="./vendor/jquery/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
+<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
+<!-- Bootstrap -->
+<script src="./vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- Chart.js -->
+<script src="./vendor/Chart.js/dist/Chart.min.js"></script>
+<script>
+	document.write("<script type='text/javascript' src='./userInfo.js?version=" + Date.now() + "'><\/script>");
+</script>
+<!-- Datatables -->
+<script src="./vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="./vendor/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="./vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="./vendor/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+<script src="./vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+<script src="./vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="./vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="./vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="./vendor/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+
+
+</html>

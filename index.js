@@ -5,7 +5,12 @@ var info = "";
 window.onload = function() {
     Number.prototype.format = function(n) {
         var r = new RegExp('\\d(?=(\\d{3})+' + (n > 0 ? '\\.' : '$') + ')', 'g');
-        return this.toFixed(Math.max(0, Math.floor(n))).replace(r, '$&,');
+        return this.toFixed(0).replace(r, '$&,');
+    };
+
+    Number.prototype.formatFloat = function(n) {
+        var r = new RegExp('\\d(?=(\\d{3})+' + (n > 0 ? '\\.' : '$') + ')', 'g');
+        return this.toFixed(1).replace(r, '$&,');
     };
     
 
@@ -30,13 +35,7 @@ window.onload = function() {
 
     getFitnessList();
     getClientList(0);
-    getChallengeList();
 
-}
-
-function formatBit(n, width) {
-    n = n + '';
-    return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
 }
 
 function formatDate() {
@@ -107,6 +106,15 @@ function getFitnessInfo() {
    
 }
 
+function successCheck(result){
+    if(result === '2'){
+        return 1;
+    }
+    else{
+        return 0 ;
+    }
+}
+
 function getClientList(fitnessid) {
     table.clear().draw();
 
@@ -126,6 +134,8 @@ function getClientList(fitnessid) {
         dataType: 'json',
         success: function(data) {
             var sex;
+            var successRate;
+            var totalSuccessRate = 0;
 
             for(var i in data){
                 if(data[i].sex === '1'){
@@ -135,18 +145,23 @@ function getClientList(fitnessid) {
                     sex = "여";
                 }
 
+                successRate = successCheck(data[i].mon) + successCheck(data[i].tue) + successCheck(data[i].wed) + successCheck(data[i].thu) + successCheck(data[i].fri) + successCheck(data[i].sat) + successCheck(data[i].sun);
+                successRate = ((successRate / 7) * 100).toFixed(1);
+
                 table.row.add([
                     info + data[i].fitnessname + " ( "+ data[i].branch + " )",
-                    info + data[i].name,
+                    info + '<a href="./userInfo.html?clientid='+ data[i].client_id +'">'+ data[i].name + '</a>',
                     info + sex,
                     info + data[i].birth,
                     info + setNamingforJointdirection(data[i].exercisecode),
                     info + data[i].price + "원",
-                    info ,
+                    info + successRate + "%",
                 ]).draw(false);
 
                 price = price + parseInt(data[i].price);
+                totalSuccessRate = totalSuccessRate + parseInt(successRate);
             }
+            totalSuccessRate = (totalSuccessRate / data.length).toFixed(1);
 
             $.ajax({
                 url: 'https://elysium.azurewebsites.net/php/mf_admin_php/get_client_not_used_list.php',
@@ -164,7 +179,7 @@ function getClientList(fitnessid) {
                         }
                         table.row.add([
                             info + data[i].fitnessname + " ( "+ data[i].branch + " )",
-                            info + data[i].name,
+                            info + '<a href="./userInfo.html?clientid='+ data[i].client_id +'">'+ data[i].name + '</a>',
                             info + sex,
                             info + data[i].birth,
                             info + "--",
@@ -175,6 +190,12 @@ function getClientList(fitnessid) {
 
                     document.getElementById('total-amount').innerHTML = price;
                     document.getElementById('total-users').innerHTML = document.getElementById('client-datatable').getElementsByTagName("tr").length - 1;
+
+                    if(isNaN(totalSuccessRate)){
+                        totalSuccessRate = 0;
+                    }
+
+                    document.getElementById('Challenge-success-rate').innerHTML = totalSuccessRate;
                     
                     $('.count').each(function() {
                         $(this).prop('counter', 0).animate({
@@ -184,6 +205,18 @@ function getClientList(fitnessid) {
                             easing: 'easeOutExpo',
                             step: function(step) {
                                 $(this).text(step.format());
+                            }
+                        });
+                    });
+
+                    $('.count-float').each(function() {
+                        $(this).prop('counter', 0).animate({
+                            counter: $(this).text()
+                        }, {
+                            duration: 2000,
+                            easing: 'easeOutExpo',
+                            step: function(step) {
+                                $(this).text(step.formatFloat());
                             }
                         });
                     });
@@ -203,34 +236,34 @@ function getClientList(fitnessid) {
 
 
 //*****************꼭 필요한지 ? 
-function getChallengeList() {
-    var challengeList = [];
-    $.ajax({
-        url: 'https://elysium.azurewebsites.net/php/mf_admin_php/get_challenge_list.php',
-        type: 'POST',
-        dataType: 'json',
-        success: function(data) {
-            $.each(data, function(i, itemData) {
-                var challengeId = itemData.challengeid;
-                var challengeCode = itemData.exercisecode;
+// function getChallengeList() {
+//     var challengeList = [];
+//     $.ajax({
+//         url: 'https://elysium.azurewebsites.net/php/mf_admin_php/get_challenge_list.php',
+//         type: 'POST',
+//         dataType: 'json',
+//         success: function(data) {
+//             $.each(data, function(i, itemData) {
+//                 var challengeId = itemData.challengeid;
+//                 var challengeCode = itemData.exercisecode;
   
-                var data = {
-                    "id": challengeId,
-                    "text": setNamingforJointdirection(challengeCode)
-                };
-                challengeList.push(data);
-            });
+//                 var data = {
+//                     "id": challengeId,
+//                     "text": setNamingforJointdirection(challengeCode)
+//                 };
+//                 challengeList.push(data);
+//             });
 
-            $("#challenge-drop").select2({
-                data: challengeList
-            });
-        },
-        error: function(request, status, error) {
-            console.log(request, status, error);
-        },
-    });
+//             $("#challenge-drop").select2({
+//                 data: challengeList
+//             });
+//         },
+//         error: function(request, status, error) {
+//             console.log(request, status, error);
+//         },
+//     });
 
-}
+// }
 
 
 function setNamingforJointdirection(jointdirection) {

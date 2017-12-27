@@ -28,6 +28,10 @@ a{
 	margin-top: 15px;
 }
 
+.mb-50{
+	margin-bottom: 50px;
+}
+
 h1,h2,h3,h4,h5,h6{
 	color: #313131;
     font-family: Rubik,sans-serif;
@@ -116,7 +120,7 @@ main{
     font-size: 16px;
 }
 
-.count, .count-deco{
+.count, .count-deco, .count-float{
 	font-weight: bold;
 	font-size: 2.5em;
 }
@@ -183,6 +187,9 @@ main{
 	width: 30%;
 }
 
+.table-striped>tbody>tr:nth-of-type(odd){
+	background-color: #fff;
+}
 
 
 /* -------------------Client Container------------------- */
@@ -199,10 +206,39 @@ main{
 /* -------------------------main-content------------------------- */
 
 /* -------------------Member Information------------------ */
-.member-information{
-	height: 130px;
+.member-information-info h2{
+	font-weight: bold;
+	font-size: 2.5em;
+	margin-bottom: 20px;
+}
+
+.member-information-info{
+	padding-bottom: 25px;
+	margin-bottom: 25px;
+	text-align: center;
+	border-bottom: 1px solid #000;
+}
+
+.member-information-number{
+	font-size: 1.1em;
+
+}
+
+.member-information-number .count{
+	float: right;
+	font-weight: 600;
+	font-size: 1.2em;
 }
 
 /* -------------------Member Information------------------ */
+
+/* -------------------challenge Information------------------ */
+#challenge-name{
+	font-weight: bold;
+	font-size: 2em;
+}
+
+
+/* -------------------challenge Information------------------ */
 
 /* -------------------------main-content------------------------- */
