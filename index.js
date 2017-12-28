@@ -35,6 +35,7 @@ window.onload = function() {
 
     getFitnessList();
     getClientList(0);
+   
 
 }
 
@@ -117,7 +118,6 @@ function successCheck(result){
 
 function getClientList(fitnessid) {
     table.clear().draw();
-
     var post_data;
     var price = 0;
 
@@ -135,7 +135,6 @@ function getClientList(fitnessid) {
         success: function(data) {
             var sex;
             var successRate;
-            var totalSuccessRate = 0;
 
             for(var i in data){
                 if(data[i].sex === '1'){
@@ -159,9 +158,11 @@ function getClientList(fitnessid) {
                 ]).draw(false);
 
                 price = price + parseInt(data[i].price);
-                totalSuccessRate = totalSuccessRate + parseInt(successRate);
+
+                
+
             }
-            totalSuccessRate = (totalSuccessRate / data.length).toFixed(1);
+
 
             $.ajax({
                 url: 'https://elysium.azurewebsites.net/php/mf_admin_php/get_client_not_used_list.php',
@@ -188,38 +189,8 @@ function getClientList(fitnessid) {
                         ]).draw(false);
                     }
 
-                    document.getElementById('total-amount').innerHTML = price;
-                    document.getElementById('total-users').innerHTML = document.getElementById('client-datatable').getElementsByTagName("tr").length - 1;
-
-                    if(isNaN(totalSuccessRate)){
-                        totalSuccessRate = 0;
-                    }
-
-                    document.getElementById('Challenge-success-rate').innerHTML = totalSuccessRate;
+                    getVisualizationInfo(price, fitnessid);
                     
-                    $('.count').each(function() {
-                        $(this).prop('counter', 0).animate({
-                            counter: $(this).text()
-                        }, {
-                            duration: 2000,
-                            easing: 'easeOutExpo',
-                            step: function(step) {
-                                $(this).text(step.format());
-                            }
-                        });
-                    });
-
-                    $('.count-float').each(function() {
-                        $(this).prop('counter', 0).animate({
-                            counter: $(this).text()
-                        }, {
-                            duration: 2000,
-                            easing: 'easeOutExpo',
-                            step: function(step) {
-                                $(this).text(step.formatFloat());
-                            }
-                        });
-                    });
                 },
                 error: function(request, status, error) {
                     console.log(request, status, error);
@@ -234,36 +205,59 @@ function getClientList(fitnessid) {
 
 }
 
+function getVisualizationInfo(price, fitnessid){
+    var post_data
+    if(fitnessid === 0){
+        post_data = "";
+    }
+    else{
+        post_data = "fitnessid=" + fitnessid;
+    }
 
-//*****************꼭 필요한지 ? 
-// function getChallengeList() {
-//     var challengeList = [];
-//     $.ajax({
-//         url: 'https://elysium.azurewebsites.net/php/mf_admin_php/get_challenge_list.php',
-//         type: 'POST',
-//         dataType: 'json',
-//         success: function(data) {
-//             $.each(data, function(i, itemData) {
-//                 var challengeId = itemData.challengeid;
-//                 var challengeCode = itemData.exercisecode;
-  
-//                 var data = {
-//                     "id": challengeId,
-//                     "text": setNamingforJointdirection(challengeCode)
-//                 };
-//                 challengeList.push(data);
-//             });
+     $.ajax({
+        url: 'https://elysium.azurewebsites.net/php/mf_admin_php/get_visualization_info.php',
+        type: 'POST',
+        data: post_data,
+        dataType: 'json',
+        success: function(data) {
+            var successRate = (parseInt(data[0].success) / parseInt(data[0].number))*100;
+            if(isNaN(successRate)){
+                successRate = 0;
+            }
+            document.getElementById('total-amount').innerHTML = data[0].price;
+            document.getElementById('Challenge-success-rate').innerHTML = successRate;
+            document.getElementById('total-amount-this-week').innerHTML = price;
+            document.getElementById('total-users').innerHTML = document.getElementById('client-datatable').getElementsByTagName("tr").length - 1;
 
-//             $("#challenge-drop").select2({
-//                 data: challengeList
-//             });
-//         },
-//         error: function(request, status, error) {
-//             console.log(request, status, error);
-//         },
-//     });
+            $('.count').each(function() {
+                $(this).prop('counter', 0).animate({
+                    counter: $(this).text()
+                }, {
+                    duration: 2000,
+                    easing: 'easeOutExpo',
+                    step: function(step) {
+                        $(this).text(step.format());
+                    }
+                });
+            });
 
-// }
+            $('.count-float').each(function() {
+                $(this).prop('counter', 0).animate({
+                    counter: $(this).text()
+                }, {
+                    duration: 2000,
+                    easing: 'easeOutExpo',
+                    step: function(step) {
+                        $(this).text(step.formatFloat());
+                    }
+                });
+            });
+                    },
+        error: function(request, status, error) {
+            console.log(request, status, error);
+        },
+    });
+}
 
 
 function setNamingforJointdirection(jointdirection) {

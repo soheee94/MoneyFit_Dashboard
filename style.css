@@ -105,6 +105,7 @@ header img{
 main{
 	height: 100vh;
 	padding-top: 15px;
+	padding-bottom: 15px;
 }
 
 .main-content{
@@ -224,7 +225,7 @@ main{
 
 }
 
-.member-information-number .count{
+.member-information-number span{
 	float: right;
 	font-weight: 600;
 	font-size: 1.2em;
@@ -235,7 +236,16 @@ main{
 /* -------------------challenge Information------------------ */
 #challenge-name{
 	font-weight: bold;
-	font-size: 2em;
+	font-size: 2.5em;
+	line-height: 2.5em;
+}
+
+#before-challenge-date{
+	width: 25%;
+}
+
+#tab .nav>li>a:focus, .nav>li>a:hover{
+	background-color: #edf1f5;
 }
 
 

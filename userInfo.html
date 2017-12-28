@@ -38,24 +38,11 @@
 		<!-- /Header -->
 
 		<!-- Content -->
-		<div class="content container-fluid">
-			<div class="row">
-				<!-- sidebar //option -->
-				<nav class="col-sm-2 col-md-2 d-none d-sm-block sidebar">
-					<ul class="nav nav-pills flex-column">
-						<li class="nav-item">
-							<a href="#" class="nav-link active">Fitness</a>
-						</li>
-						<li class="nav-item">
-							<a href="#" class="nav-link">Challenge</a>
-						</li>
-					</ul>					
-				</nav>
-				<!-- /sidebar //option -->
-
+		<div class="content container-fluid bg-light ">
+			<div class="">
 				<!-- main-content -->
-				<main role="main" class="col-sm-10 ml-sm-auto col-md-10 pt-3 bg-light main-wrapper">
-					<div class="main-content row">
+				<main role="main" class="pt-3 main-wrapper">
+					<div class="main-content row" style="padding-right : 30px; ">
 						<!-- Member Information -->
 						<div class="member-information-container col-sm-3 ml-sm-auto col-md-3">
 						   <div class="member-information bg-white pd-25">
@@ -68,7 +55,7 @@
 
 								 <div class="member-information-number">
 									<p>Total Point <span class="count" id="member-balance">0</span></p>								 
-									<p>Success rate <span class="count">100</span></p>
+									<p>Success rate <span>%</span><span class="count-float" id="member-total-success-rate">0</span></p>
 								 </div>
 
 						   </div>
@@ -92,14 +79,19 @@
 							         <!-- Challenge -->
 										<div class="challenge-container mt-15 mb-50">
 											<h3 class="box-title">Challenge</h3>
-											<div class="challenge-info">
-												<p><span id="challenge-name">Push Up</span> ( <span id="challenge-date">2017-12-24 ~ 2017-12-31</span> )</p>
-												
-												<p id="challenge-price">10,000 원 배팅 중</p>
-												<p id="challenge-success-rate">현재 성공률 : 27%</p>
+											<div class="row" id="challenge-info">
+												<div class="col-lg-5 col-sm-5 col-xs-12">
+													<p id="challenge-name"> -- </p>
+												</div>
+
+												<div class="col-lg-7 col-sm-7 col-xs-12">
+													<p>기간 : <span id="challenge-date"> -- ~ -- </span></p>
+													<p>배팅 금액 : <span id="challenge-price"> -- </span>원</p>
+													<p>현재 성공률 : <span id="challenge-success-rate"> -- </span>%</p>
+												</div>												
 											</div>
 
-											<p class="pd-25 not-used-challenge" style="text-align : center; display : none;">현재 이용 내역 없음 </p>
+											<p class="pd-25" id="not-used-challenge" style="text-align : center; display : none;">현재 이용 중인 챌린지가 없습니다.</p>
 										</div>
 										<!-- /Challenge -->
 
@@ -112,7 +104,7 @@
 													<tr>
 													  <th id="">챌린지 이름</th>
 													  <th id="">배팅 금액</th>
-													  <th id="">진행 기간</th>
+													  <th id="before-challenge-date">진행 기간</th>
 													  <th id="">결과</th>
 													  <th id="">환급 금액</th>
 													</tr>
@@ -136,6 +128,7 @@
 
 							      <div class="tab-pane" id="point">
 							         <h3>포인트 사용 내역</h3>
+							         <h5>추후 개발 예정</h5>
 							      </div>
 							   </div>
 							</div>
